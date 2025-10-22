@@ -1,0 +1,5 @@
+component,auc,accuracy,description
+Full Pipeline,0.8917029569677378,0.91135,All components included
+Without SMOTE,0.8981898388126884,0.942,No class imbalance handling
+Without Scaling,0.8978167899145727,0.9422,No feature scaling
+Minimal Pipeline,0.8978167899145727,0.9422,"No SMOTE, no scaling"

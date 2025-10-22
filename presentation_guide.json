@@ -1,0 +1,71 @@
+{
+  "title": "Hướng dẫn chuẩn bị báo cáo đồ án",
+  "created_date": "2025-09-08T11:06:15.302850",
+  "essential_files": {
+    "core_data": [
+      "2019-Oct.csv",
+      "processed_data.csv",
+      "real_cosmetics_dataset.csv"
+    ],
+    "models": [
+      "best_model_xgboost.pkl",
+      "scaler.pkl"
+    ],
+    "results": [
+      "final_report.json",
+      "cosmetics_test_results.json",
+      "refined_cosmetics_test_results.json",
+      "academic_evaluation_report.json"
+    ],
+    "visualizations": [
+      "final_report_visualization.png",
+      "cosmetics_model_test_results.png",
+      "refined_cosmetics_test_results.png",
+      "paper_comparison_detailed.png",
+      "huggingface_papers_comparison.png"
+    ],
+    "code_files": [
+      "analyze_dataset.py",
+      "fast_model_comparison.py",
+      "test_model_on_cosmetics.py",
+      "refine_cosmetics_dataset.py",
+      "final_report.py",
+      "paper_comparison.py",
+      "huggingface_papers_comparison.py"
+    ]
+  },
+  "report_structure": {
+    "word_document": [
+      "Trang bìa",
+      "Mục lục",
+      "Lời cảm ơn",
+      "Tóm tắt",
+      "Chương 1: Giới thiệu",
+      "Chương 2: Tổng quan tài liệu",
+      "Chương 3: Phương pháp nghiên cứu",
+      "Chương 4: Kết quả thực nghiệm",
+      "Chương 5: Kết luận",
+      "Tài liệu tham khảo"
+    ],
+    "powerpoint_slides": [
+      "Slide 1: Title",
+      "Slide 2: Abstract",
+      "Slide 3: Vấn đề nghiên cứu",
+      "Slide 4: Mục tiêu",
+      "Slide 5: Tổng quan tài liệu",
+      "Slide 6: Phương pháp",
+      "Slide 7: Dataset",
+      "Slide 8: Kết quả training",
+      "Slide 9: Cross-domain testing",
+      "Slide 10: Kết luận",
+      "Slide 11: Q&A"
+    ]
+  },
+  "key_numbers": {
+    "dataset_size": "4.1M records",
+    "class_imbalance": "15.78:1",
+    "best_auc": "89.84%",
+    "cross_domain_auc": "95.29%",
+    "papers_compared": "3+ papers (2023-2024)"
+  }
+}

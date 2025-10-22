@@ -1,0 +1,9 @@
+{
+  "dataset": "Real Cosmetics Dataset",
+  "auc_score": 0.765992697565173,
+  "prediction_accuracy": 0.5166533333333333,
+  "actual_purchase_rate": 0.2545866666666667,
+  "predicted_purchase_rate": 0.7238,
+  "compatibility": "LOW",
+  "recommendation": "Model needs significant improvement for cosmetics domain"
+}

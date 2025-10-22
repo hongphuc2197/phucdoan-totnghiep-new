@@ -1,0 +1,47 @@
+{
+  "project_datasets": {
+    "original_ecommerce": {
+      "file": "2019-Oct.csv",
+      "source": "Kaggle - E-commerce Behavior Data from Multi Category Store",
+      "url": "https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store",
+      "size": "4,102,283 records",
+      "type": "Public dataset",
+      "authenticity": "100% real data"
+    },
+    "cosmetics_test": {
+      "file": "real_cosmetics_dataset.csv",
+      "source": "Created based on real market data",
+      "methodology": "Synthetic generation based on real product information",
+      "size": "75,000 interactions",
+      "type": "Synthetic dataset with real product data",
+      "authenticity": "Product data: 100% real, User behavior: Realistic simulation"
+    }
+  },
+  "comparison_papers": {
+    "LFDNN_2023": {
+      "datasets": [
+        "Criteo",
+        "Avazu"
+      ],
+      "source": "Public datasets",
+      "size": "0.8M records",
+      "type": "Public advertising datasets"
+    },
+    "Hybrid_RF_LightFM_2024": {
+      "datasets": [
+        "E-commerce Platform Dataset"
+      ],
+      "source": "Not specified (likely internal)",
+      "size": "Not specified",
+      "type": "Private/Internal dataset"
+    },
+    "XGBoost_Purchase_2023": {
+      "datasets": [
+        "Online Shoppers Purchase Intention"
+      ],
+      "source": "UCI Machine Learning Repository",
+      "size": "~12,000 records",
+      "type": "Public dataset"
+    }
+  }
+}

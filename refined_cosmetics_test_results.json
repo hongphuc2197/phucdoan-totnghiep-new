@@ -1,0 +1,13 @@
+{
+  "dataset": "Refined Cosmetics Dataset (Top 2 Products)",
+  "products": [
+    "L'Or\u00e9al Paris True Match Foundation",
+    "Tarte Shape Tape Concealer"
+  ],
+  "auc_score": 0.9529278056256386,
+  "prediction_accuracy": 0.8231144872490505,
+  "actual_purchase_rate": 0.29232230059685294,
+  "predicted_purchase_rate": 0.4692078133478025,
+  "compatibility": "HIGH",
+  "recommendation": "Model performs well on refined cosmetics dataset"
+}

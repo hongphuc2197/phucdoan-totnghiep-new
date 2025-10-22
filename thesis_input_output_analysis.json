@@ -1,0 +1,145 @@
+{
+  "input": {
+    "primary_dataset": {
+      "name": "2019-Oct.csv",
+      "source": "Kaggle - E-commerce Behavior Data",
+      "size": "4,102,283 records",
+      "features": [
+        "user_id",
+        "product_id",
+        "category_id",
+        "price",
+        "event_type",
+        "timestamp"
+      ],
+      "description": "Dữ liệu hành vi người dùng trên e-commerce platform"
+    },
+    "secondary_dataset": {
+      "name": "real_cosmetics_dataset.csv",
+      "source": "Tạo dựa trên dữ liệu thị trường thực tế",
+      "size": "10,000 records",
+      "features": [
+        "user_id",
+        "product_name",
+        "brand",
+        "category",
+        "price",
+        "rating",
+        "reviews_count",
+        "event_type",
+        "purchased",
+        "session_duration",
+        "pages_viewed",
+        "age",
+        "gender",
+        "income_level",
+        "beauty_enthusiast",
+        "skin_type"
+      ],
+      "description": "Dữ liệu mỹ phẩm để test cross-domain"
+    },
+    "literature_data": {
+      "papers": [
+        "LFDNN (2023): Deep Learning for Recommendation",
+        "Hybrid RF + LightFM (2024): Ensemble Methods",
+        "XGBoost Purchase Prediction (2023): Gradient Boosting"
+      ],
+      "description": "Các nghiên cứu mới nhất để so sánh"
+    },
+    "technical_inputs": {
+      "algorithms": [
+        "XGBoost",
+        "LightGBM",
+        "Random Forest",
+        "Logistic Regression"
+      ],
+      "techniques": [
+        "SMOTE",
+        "Feature Engineering",
+        "Cross-validation"
+      ],
+      "tools": [
+        "Python",
+        "Pandas",
+        "Scikit-learn",
+        "XGBoost",
+        "Matplotlib"
+      ]
+    }
+  },
+  "output": {
+    "primary_model": {
+      "name": "XGBoost Recommendation Model",
+      "file": "best_model_xgboost.pkl",
+      "performance": {
+        "auc_score": 0.8984,
+        "accuracy": 0.906,
+        "precision": 0.85,
+        "recall": 0.9,
+        "f1_score": 0.874
+      },
+      "description": "Model chính để dự đoán hành vi mua hàng"
+    },
+    "scaler": {
+      "name": "StandardScaler",
+      "file": "scaler.pkl",
+      "description": "Scaler để chuẩn hóa features"
+    },
+    "processed_datasets": {
+      "main_dataset": {
+        "name": "processed_data.csv",
+        "size": "4,102,283 records",
+        "features": 31,
+        "description": "Dataset đã được xử lý và feature engineering"
+      },
+      "cosmetics_dataset": {
+        "name": "real_cosmetics_dataset.csv",
+        "size": "10,000 records",
+        "features": 16,
+        "description": "Dataset mỹ phẩm để test cross-domain"
+      }
+    },
+    "results_and_reports": {
+      "final_report": {
+        "file": "final_report.json",
+        "content": "Báo cáo tổng hợp kết quả chính"
+      },
+      "cosmetics_test_results": {
+        "file": "cosmetics_test_results.json",
+        "content": "Kết quả test trên dataset mỹ phẩm"
+      },
+      "refined_results": {
+        "file": "refined_cosmetics_test_results.json",
+        "content": "Kết quả sau khi refine (top 2 products)"
+      },
+      "academic_evaluation": {
+        "file": "academic_evaluation_report.json",
+        "content": "Đánh giá tính học thuật của luận án"
+      }
+    },
+    "visualizations": {
+      "performance_charts": [
+        "final_report_visualization.png",
+        "cosmetics_model_test_results.png",
+        "refined_cosmetics_test_results.png"
+      ],
+      "comparison_charts": [
+        "paper_comparison_detailed.png",
+        "huggingface_papers_comparison.png"
+      ],
+      "analysis_charts": [
+        "feature_importances.png",
+        "precision_recall_curves.png",
+        "roc_curves_comparison.png"
+      ]
+    },
+    "code_source": {
+      "data_processing": "analyze_dataset.py",
+      "model_training": "fast_model_comparison.py",
+      "cross_domain_testing": "test_model_on_cosmetics.py",
+      "refinement": "refine_cosmetics_dataset.py",
+      "reporting": "final_report.py",
+      "literature_comparison": "paper_comparison.py"
+    }
+  }
+}

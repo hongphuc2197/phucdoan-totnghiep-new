@@ -1,0 +1,354 @@
+{
+  "cover_page": {
+    "title": "LUẬN ÁN TỐT NGHIỆP",
+    "subtitle": "XÂY DỰNG HỆ THỐNG GỢI Ý DỰA TRÊN HÀNH VI CỦA NGƯỜI DÙNG",
+    "student": "[Tên sinh viên]",
+    "supervisor": "[Tên giảng viên hướng dẫn]",
+    "department": "[Tên khoa/ngành]",
+    "university": "[Tên trường]",
+    "date": "[Năm học]",
+    "pages": 1
+  },
+  "table_of_contents": {
+    "title": "MỤC LỤC",
+    "sections": [
+      "Lời cảm ơn",
+      "Tóm tắt luận án",
+      "Abstract",
+      "Danh mục các ký hiệu và chữ viết tắt",
+      "Danh mục bảng biểu",
+      "Danh mục hình vẽ",
+      "Mở đầu",
+      "Chương 1: Tổng quan về hệ thống gợi ý",
+      "Chương 2: Cơ sở lý thuyết và phương pháp",
+      "Chương 3: Phương pháp nghiên cứu",
+      "Chương 4: Kết quả thực nghiệm",
+      "Chương 5: Kết luận và hướng phát triển",
+      "Tài liệu tham khảo",
+      "Phụ lục"
+    ],
+    "pages": 2
+  },
+  "acknowledgments": {
+    "title": "LỜI CẢM ƠN",
+    "content": [
+      "Cảm ơn giảng viên hướng dẫn",
+      "Cảm ơn các thầy cô trong khoa",
+      "Cảm ơn gia đình và bạn bè",
+      "Cảm ơn các tác giả của các paper tham khảo"
+    ],
+    "pages": 1
+  },
+  "abstract": {
+    "title": "TÓM TẮT LUẬN ÁN",
+    "content": [
+      "Vấn đề nghiên cứu",
+      "Mục tiêu nghiên cứu",
+      "Phương pháp nghiên cứu",
+      "Kết quả chính",
+      "Đóng góp của luận án"
+    ],
+    "pages": 1
+  },
+  "english_abstract": {
+    "title": "ABSTRACT",
+    "content": [
+      "Research problem",
+      "Research objectives",
+      "Research methodology",
+      "Main results",
+      "Contributions"
+    ],
+    "pages": 1
+  },
+  "chapter_1": {
+    "title": "CHƯƠNG 1: TỔNG QUAN VỀ HỆ THỐNG GỢI Ý",
+    "sections": {
+      "1.1": {
+        "title": "Giới thiệu chung",
+        "content": [
+          "Khái niệm hệ thống gợi ý",
+          "Tầm quan trọng trong thương mại điện tử",
+          "Các loại hệ thống gợi ý",
+          "Thách thức trong xây dựng hệ thống gợi ý"
+        ],
+        "pages": 2
+      },
+      "1.2": {
+        "title": "Phân loại hệ thống gợi ý",
+        "content": [
+          "Collaborative Filtering",
+          "Content-based Filtering",
+          "Hybrid Recommendation Systems",
+          "Deep Learning trong gợi ý"
+        ],
+        "pages": 2
+      },
+      "1.3": {
+        "title": "Ứng dụng trong thực tế",
+        "content": [
+          "E-commerce platforms",
+          "Social media",
+          "Streaming services",
+          "News and content platforms"
+        ],
+        "pages": 2
+      },
+      "1.4": {
+        "title": "Vấn đề nghiên cứu",
+        "content": [
+          "Class imbalance trong dữ liệu mua hàng",
+          "Khả năng generalization cross-domain",
+          "Hiệu suất trên dataset lớn",
+          "So sánh với các phương pháp mới nhất"
+        ],
+        "pages": 2
+      },
+      "1.5": {
+        "title": "Mục tiêu nghiên cứu",
+        "content": [
+          "Mục tiêu chính",
+          "Mục tiêu cụ thể",
+          "Câu hỏi nghiên cứu",
+          "Phạm vi nghiên cứu"
+        ],
+        "pages": 2
+      }
+    },
+    "total_pages": 10
+  },
+  "chapter_2": {
+    "title": "CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ PHƯƠNG PHÁP",
+    "sections": {
+      "2.1": {
+        "title": "Machine Learning cơ bản",
+        "content": [
+          "Khái niệm Machine Learning",
+          "Supervised Learning",
+          "Unsupervised Learning",
+          "Evaluation Metrics"
+        ],
+        "pages": 2
+      },
+      "2.2": {
+        "title": "XGBoost và Gradient Boosting",
+        "content": [
+          "Gradient Boosting Algorithm",
+          "XGBoost Architecture",
+          "Hyperparameters tuning",
+          "Advantages và limitations"
+        ],
+        "pages": 2
+      },
+      "2.3": {
+        "title": "Xử lý Class Imbalance",
+        "content": [
+          "Vấn đề class imbalance",
+          "SMOTE Algorithm",
+          "Other resampling techniques",
+          "Evaluation metrics for imbalanced data"
+        ],
+        "pages": 2
+      },
+      "2.4": {
+        "title": "Feature Engineering",
+        "content": [
+          "Feature selection",
+          "Feature transformation",
+          "Feature creation",
+          "Feature scaling"
+        ],
+        "pages": 2
+      },
+      "2.5": {
+        "title": "Cross-validation và Model Selection",
+        "content": [
+          "K-fold Cross-validation",
+          "Stratified Cross-validation",
+          "Hyperparameter optimization",
+          "Model comparison techniques"
+        ],
+        "pages": 2
+      },
+      "2.6": {
+        "title": "Tổng quan các nghiên cứu liên quan",
+        "content": [
+          "Literature review methodology",
+          "Recent papers (2023-2024)",
+          "Comparison frameworks",
+          "Research gaps"
+        ],
+        "pages": 2
+      }
+    },
+    "total_pages": 12
+  },
+  "chapter_3": {
+    "title": "CHƯƠNG 3: PHƯƠNG PHÁP NGHIÊN CỨU",
+    "sections": {
+      "3.1": {
+        "title": "Tổng quan phương pháp nghiên cứu",
+        "content": [
+          "Research methodology framework",
+          "Data-driven approach",
+          "Experimental design",
+          "Validation strategy"
+        ],
+        "pages": 2
+      },
+      "3.2": {
+        "title": "Dataset và tiền xử lý",
+        "content": [
+          "Dataset description",
+          "Data preprocessing pipeline",
+          "Feature engineering process",
+          "Data quality assessment"
+        ],
+        "pages": 2
+      },
+      "3.3": {
+        "title": "Phương pháp xây dựng model",
+        "content": [
+          "Model selection criteria",
+          "Training methodology",
+          "Validation approach",
+          "Performance evaluation"
+        ],
+        "pages": 2
+      },
+      "3.4": {
+        "title": "Phương pháp so sánh với literature",
+        "content": [
+          "Paper selection criteria",
+          "Comparison methodology",
+          "Performance metrics alignment",
+          "Statistical significance testing"
+        ],
+        "pages": 2
+      },
+      "3.5": {
+        "title": "Phương pháp test cross-domain",
+        "content": [
+          "Domain adaptation approach",
+          "Feature alignment strategy",
+          "Performance evaluation",
+          "Refinement methodology"
+        ],
+        "pages": 2
+      }
+    },
+    "total_pages": 10
+  },
+  "chapter_4": {
+    "title": "CHƯƠNG 4: KẾT QUẢ THỰC NGHIỆM",
+    "sections": {
+      "4.1": {
+        "title": "Phân tích dataset",
+        "content": [
+          "Dataset statistics",
+          "Data distribution analysis",
+          "Class imbalance analysis",
+          "Feature correlation analysis"
+        ],
+        "pages": 3
+      },
+      "4.2": {
+        "title": "Kết quả training và so sánh model",
+        "content": [
+          "Model performance comparison",
+          "Hyperparameter tuning results",
+          "Cross-validation results",
+          "Feature importance analysis"
+        ],
+        "pages": 3
+      },
+      "4.3": {
+        "title": "So sánh với các nghiên cứu mới nhất",
+        "content": [
+          "Literature comparison results",
+          "Performance benchmarking",
+          "Statistical significance analysis",
+          "Advantages and limitations"
+        ],
+        "pages": 3
+      },
+      "4.4": {
+        "title": "Kết quả test cross-domain",
+        "content": [
+          "Cosmetics dataset analysis",
+          "Cross-domain performance",
+          "Refinement results",
+          "Domain adaptation effectiveness"
+        ],
+        "pages": 3
+      },
+      "4.5": {
+        "title": "Phân tích chi tiết kết quả",
+        "content": [
+          "Error analysis",
+          "Performance by category",
+          "Model interpretability",
+          "Business implications"
+        ],
+        "pages": 3
+      }
+    },
+    "total_pages": 15
+  },
+  "chapter_5": {
+    "title": "CHƯƠNG 5: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN",
+    "sections": {
+      "5.1": {
+        "title": "Kết luận chính",
+        "content": [
+          "Achievement of research objectives",
+          "Key findings",
+          "Contributions to the field",
+          "Practical implications"
+        ],
+        "pages": 2
+      },
+      "5.2": {
+        "title": "Hạn chế của nghiên cứu",
+        "content": [
+          "Dataset limitations",
+          "Methodological constraints",
+          "Evaluation limitations",
+          "Generalization challenges"
+        ],
+        "pages": 1
+      },
+      "5.3": {
+        "title": "Hướng phát triển tương lai",
+        "content": [
+          "Deep learning approaches",
+          "Real-time recommendation",
+          "Multi-domain adaptation",
+          "Advanced feature engineering"
+        ],
+        "pages": 2
+      }
+    },
+    "total_pages": 5
+  },
+  "references": {
+    "title": "TÀI LIỆU THAM KHẢO",
+    "content": [
+      "Academic papers (20-30 references)",
+      "Books and textbooks (5-10 references)",
+      "Online resources and datasets",
+      "Technical documentation"
+    ],
+    "pages": 3
+  },
+  "appendices": {
+    "title": "PHỤ LỤC",
+    "content": [
+      "A. Code source đầy đủ",
+      "B. Dataset chi tiết",
+      "C. Kết quả thực nghiệm đầy đủ",
+      "D. Biểu đồ và hình ảnh bổ sung"
+    ],
+    "pages": 5
+  }
+}
