@@ -2,8 +2,8 @@
 
 **Đề tài:** XÂY DỰNG HỆ THỐNG GỢI Ý DỰA TRÊN HÀNH VI CỦA NGƯỜI DÙNG
 
-**Tổng số slides:** 20 slides  
-**Thời gian:** 20-25 phút
+**Tổng số slides:** 21 slides  
+**Thời gian:** 21-24 phút
 
 ---
 
@@ -41,27 +41,27 @@ Giảng viên hướng dẫn: [Tên GVHD]
 
 ### Nội dung:
 ```
-NỘI DUNG TRÌNH BÀY
+CẤU TRÚC LUẬN VĂN
 
-1. Giới thiệu
-   • Đặt vấn đề
-   • Mục tiêu nghiên cứu
+1. ĐẶT VẤN ĐỀ (Problem)
+   • Input/Output của bài toán
+   • Gap trong SOTA
 
-2. Cơ sở lý thuyết
-   • Hệ thống gợi ý
-   • XGBoost và SMOTE
+2. HIỆN TRẠNG (Related Work)
+   • Khái niệm cốt lõi
+   • Phân nhóm công trình & hạn chế
 
-3. Bài toán và phương pháp
-   • Dataset 4.1M records
-   • Feature Engineering
-   • Model XGBoost + SMOTE
+3. GIẢI PHÁP (Proposed Method)
+   • Kiến trúc tổng thể [Flowchart]
+   • Đối sánh với SOTA
+   • Pipeline triển khai
 
-4. Kết quả thực nghiệm
-   • So sánh models
-   • So sánh với papers
-   • Cross-domain testing
+4. BẰNG CHỨNG (Evidence)
+   • Kết quả định lượng
+   • Kết quả định tính
+   • Case study
 
-5. Kết luận và hướng phát triển
+5. KẾT LUẬN & HƯỚNG PHÁT TRIỂN
 ```
 
 ### Hình ảnh:
@@ -73,73 +73,61 @@ NỘI DUNG TRÌNH BÀY
 
 ---
 
-## SLIDE 3: ĐặT VẤN ĐỀ
+## SLIDE 3: ĐẶT VẤN ĐỀ
 **[Problem Statement]**
 
 ### Nội dung:
 ```
-BỐI CẢNH VÀ THÁCH THỨC
+BÀI TOÁN
 
-🎯 E-commerce đang phát triển mạnh mẽ
-   → Cần hiểu và dự đoán hành vi khách hàng
-   → Hệ thống gợi ý là công cụ then chốt
+INPUT:
+• User behavior data
+• Product features
+• Context (time, session)
 
-⚠️ THÁCH THỨC:
+OUTPUT:
+• Purchase prediction (Binary)
+• Product recommendations
 
-1. Class Imbalance nghiêm trọng
-   • Tỷ lệ mua hàng rất thấp (5-6%)
+GAP TRONG SOTA:
+1. Class imbalance nghiêm trọng
+   • Tỷ lệ mua hàng thấp (5-6%) [1]
    • Imbalance ratio: 15.78:1
 
-2. Khả năng Generalization
-   • Model có hoạt động tốt trên domain khác?
+2. Thiếu đánh giá generalization
+   • Không test cross-domain
 
-3. Dataset quy mô lớn
-   • 4.1 triệu giao dịch thực tế
-   • Xử lý và training hiệu quả
-
-4. So sánh với SOTA
-   • Các phương pháp mới nhất (2023-2024)
+3. Thiếu so sánh baseline đầy đủ
+   • Chỉ so với deep learning models
 ```
 
 ### Hình ảnh:
-- Biểu đồ pie chart: Class distribution (5.96% vs 94.04%)
-- Icon thách thức (⚠️)
+- Sơ đồ: Input → Model → Output
+- Pie chart: Class distribution (5.96% vs 94.04%)
+- [1] Reference
 
 ### Ghi chú trình bày:
-- Nhấn mạnh tỷ lệ class imbalance cao (15.78:1)
-- So sánh với thực tế: 100 người xem, chỉ 6 người mua
-- Thời gian: 1.5 phút
+- Nêu rõ Input/Output
+- Gap: các nghiên cứu hiện tại chưa giải quyết
+- Thời gian: 1 phút
 
 ---
 
-## SLIDE 4: MỤC TIÊU NGHIÊN CỨU
-**[Research Objectives]**
+## SLIDE 4: MỤC TIÊU
+**[Objectives]**
 
 ### Nội dung:
 ```
 MỤC TIÊU NGHIÊN CỨU
 
-🎯 MỤC TIÊU CHÍNH:
-Xây dựng hệ thống dự đoán khách hàng tiềm năng 
-với hiệu suất cao và khả năng generalization tốt
+1. Xử lý class imbalance 15.78:1
+2. Đạt AUC > 85%
+3. Test generalization (cross-domain)
+4. So sánh với SOTA
 
-📋 MỤC TIÊU CỤ THỂ:
-
-✅ Phân tích dataset E-commerce 4.1M records
-
-✅ Xử lý class imbalance 15.78:1
-
-✅ Xây dựng và so sánh các models ML
-
-✅ Đạt AUC score > 85%
-
-✅ Kiểm tra cross-domain generalization
-
-✅ So sánh với nghiên cứu mới nhất (2023-2024)
-
-💡 PHẠM VI:
-• Dataset: Kaggle E-commerce (100% real data)
-• Cross-domain test: Cosmetics dataset
+PHẠM VI:
+• Dataset: 4.1M records [2]
+• Cross-domain: Cosmetics dataset
 ```
 
 ### Hình ảnh:
@@ -153,67 +141,98 @@ với hiệu suất cao và khả năng generalization tốt
 
 ---
 
-## SLIDE 5: HỆ THỐNG GỢI Ý
-**[Recommendation Systems Overview]**
+## SLIDE 5: HIỆN TRẠNG NGHIÊN CỨU
+**[Related Work]**
 
 ### Nội dung:
 ```
-CƠ SỞ LÝ THUYẾT: HỆ THỐNG GỢI Ý
+PHÂN NHÓM CÔNG TRÌNH
 
-📚 PHÂN LOẠI HỆ THỐNG GỢI Ý:
+1. Collaborative Filtering (CF)
+   • User-based, Item-based CF [3]
+   • Hạn chế: Cold start, sparsity
 
-1️⃣ Collaborative Filtering
-   • Dựa trên hành vi người dùng tương tự
-   • Nhược điểm: Cold start problem
+2. Content-based (CB)
+   • Product features [4]
+   • Hạn chế: Over-specialization
 
-2️⃣ Content-based Filtering  
-   • Dựa trên đặc điểm sản phẩm
-   • Nhược điểm: Over-specialization
+3. Deep Learning
+   • Wide & Deep [5], DeepFM [6]
+   • Hạn chế: Thiếu interpretability
 
-3️⃣ Hybrid Systems ⭐
-   • Kết hợp cả Collaborative + Content-based
-   • Khắc phục nhược điểm của từng phương pháp
-   • → ĐỒ ÁN NÀY THUỘC LOẠI HYBRID
+4. Hybrid Systems [7] ⭐
+   • CF + CB + Context
+   • Khắc phục các hạn chế
 
-🎯 ỨNG DỤNG THỰC TẾ:
-Amazon, Shopee, Lazada, Netflix, YouTube...
+→ CHƯA có nghiên cứu:
+• Xử lý imbalance quy mô lớn
+• Cross-domain generalization
 ```
 
 ### Hình ảnh:
-- Diagram 3 loại hệ thống (Venn diagram hoặc flowchart)
-- Logo các platform (Amazon, Shopee, Netflix...)
+- Venn diagram: Các nhóm phương pháp
+- Timeline research (optional)
 
 ### Ghi chú trình bày:
-- Giải thích tại sao chọn Hybrid approach
+- Phân nhóm rõ ràng
+- Hạn chế của từng nhóm
+- Gap em sẽ giải quyết
 - Thời gian: 1.5 phút
 
 ---
 
-## SLIDE 6: XGBOOST & SMOTE
+## SLIDE 6: ĐỐI SÁNH VỚI SOTA
+**[Comparison with State-of-the-Art]**
+
+### Nội dung:
+```
+SO SÁNH GIẢI PHÁP
+
+ĐIỂM GIỐNG (Kế thừa):
+✓ Hybrid approach (CF + CB + Context) [7]
+✓ Feature engineering cho e-commerce [8]
+✓ Class imbalance handling với SMOTE [9]
+
+ĐIỂM KHÁC BIỆT (Đóng góp):
+✓ Focus: Tabular data (không phải deep learning)
+✓ XGBoost: Interpretability + Performance [10]
+✓ Comprehensive baselines (4 models)
+✓ Cross-domain testing [11]
+✓ Business-oriented post-processing
+
+REFERENCE SOTA:
+• LFDNN (2023): 81.35% AUC [12]
+• Deep Interest Network (2024): 82.1% [13]
+```
+
+### Hình ảnh:
+- Comparison table: Proposed vs SOTA
+- Highlight khác biệt chính
+
+### Ghi chú trình bày:
+- Điểm giống: Em học hỏi từ đâu
+- Điểm khác: Đóng góp của em
+- So sánh cụ thể với papers
+- Thời gian: 1 phút
+
+---
+
+## SLIDE 7: XGBOOST & SMOTE
 **[Core Algorithms]**
 
 ### Nội dung:
 ```
-CÔNG NGHỆ CỐT LÕI
+CÔNG NGHỆ
 
-🌳 XGBoost (eXtreme Gradient Boosting)
+XGBoost [10]
+• Tabular data
+• scale_pos_weight
 
-Tại sao chọn XGBoost?
-✅ Hiệu suất cao trên tabular data
-✅ Xử lý class imbalance (scale_pos_weight)
-✅ Fast training & prediction
-✅ Built-in regularization
-✅ Industry standard
+SMOTE [9]
+• Synthetic sampling
+• 15.78:1 → 1:1
 
-⚖️ SMOTE (Synthetic Minority Over-sampling)
-
-Giải quyết Class Imbalance:
-• Tạo synthetic samples cho minority class
-• Không duplicate → giảm overfitting
-• Balance ratio: 15.78:1 → 1:1
-
-🔄 KẾT HỢP: XGBoost + SMOTE
-→ Xử lý hiệu quả imbalanced data quy mô lớn
+→ XGBoost + SMOTE
 ```
 
 ### Hình ảnh:
@@ -362,7 +381,60 @@ QUY TRÌNH NGHIÊN CỨU
 
 ---
 
-## SLIDE 10: SO SÁNH MODELS
+## SLIDE 10: PIPELINE TRIỂN KHAI HỆ THỐNG
+**[System Deployment Pipeline]**
+
+### Nội dung:
+```
+PIPELINE TRIỂN KHAI HỆ THỐNG GỢI Ý
+
+🔄 QUY TRÌNH HOẠT ĐỘNG:
+
+1️⃣ INPUT
+   • user_id từ người dùng
+
+2️⃣ TIỀN XỬ LÝ (Preprocessing)
+   • Sinh 24 features hành vi
+   • Features sản phẩm và ngữ cảnh
+   • Feature scaling & encoding
+
+3️⃣ HUẤN LUYỆN & DỰ ĐOÁN
+   • Model 1: Logistic Regression
+   • Model 2: Random Forest
+   • Model 3: LightGBM
+   • Model 4: XGBoost ⭐ (chọn cho production)
+
+4️⃣ HẬU XỬ LÝ (Post-processing)
+   • Loại bỏ sản phẩm đã mua gần đây
+   • Áp dụng thước đo đa dạng (diversity)
+   • Gán confidence score
+   • Tạo explanations
+
+5️⃣ OUTPUT
+   • Danh sách top-k recommendations
+   • Hiển thị trên giao diện người dùng
+
+🧪 CROSS-DOMAIN TESTING:
+• Tập mỹ phẩm thực tế: ~10,000 records
+• Kiểm tra khả năng tổng quát hóa
+• Domain: E-commerce → Cosmetics
+• Thực hành khuyến khích trong RS literature [20]
+```
+
+### Hình ảnh:
+- Flowchart từ đầu đến cuối: Input → Preprocessing → Training → Post-processing → Output
+- **Sử dụng:** `slide09_methodology_flowchart.png` (nếu có) hoặc tạo diagram mới
+- Có thể dùng icon cho từng bước
+
+### Ghi chú trình bày:
+- Pipeline đầy đủ từ input đến output
+- Post-processing quan trọng cho UX
+- Cross-domain testing chứng minh generalization
+- Thời gian: 1.5 phút
+
+---
+
+## SLIDE 11: SO SÁNH MODELS
 **[Model Comparison]**
 
 ### Nội dung:
@@ -402,128 +474,48 @@ Vượt baseline (Logistic Reg):
 
 ---
 
-## SLIDE 11: FEATURE IMPORTANCE
+## SLIDE 12: FEATURE IMPORTANCE
 **[Feature Importance Analysis]**
 
 ### Nội dung:
 ```
-FEATURE IMPORTANCE (TOP 10)
+FEATURE IMPORTANCE ANALYSIS
 
-🎯 FEATURES QUAN TRỌNG NHẤT:
+🎯 TOP 10 FEATURES QUAN TRỌNG NHẤT:
 
 Rank  Feature                   Importance
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1     cart_added_flag           28.47% 🥇
-2     price                     15.23%
-3     user_session_length       12.45%
-4     products_viewed           9.87%
-5     product_popularity        8.56%
-6     hour                      7.34%
-7     category_encoded          6.21%
-8     brand_encoded             5.89%
-9     price_range               5.12%
-10    is_weekend                4.21%
+1     purchase_rate             0.51 🥇
+2     session_duration_days      0.075
+3     total_purchases           0.065
+4     min_price                 0.065
+5     product_purchases         0.04
+6     product_purchase_rate     0.04
+7     category_views            0.025
+8     unique_categories         0.02
+9     category_users            0.015
+10    category_purchases         0.015
 
 💡 INSIGHTS:
-• Cart addition = strongest signal
-• Price & behavior rất quan trọng
-• Temporal features moderate impact
+• User behavior features quan trọng nhất
+• Product features có impact cao
+• Category features đóng góp đáng kể
 ```
 
 ### Hình ảnh:
-- **Sử dụng:** `feature_importances.png`
+- **Sử dụng:** `feature_importances.png` (XGBoost)
 - Horizontal bar chart: Top 10 features
 - Màu sắc highlight top 3
 
 ### Ghi chú trình bày:
-- Cart addition chiếm 28.47% - strongest predictor
-- User behavior (session, products viewed) rất quan trọng
-- Thời gian: 1 phút
+- **Chỉ trình bày XGBoost importance** (phương pháp chính)
+- **Đề cập ngắn gọn** về 3 phương pháp khác trong docs
+- **Nhấn mạnh** user behavior là quan trọng nhất
+- Thời gian: 1.5 phút
 
 ---
 
-## SLIDE 12: CROSS-VALIDATION
-**[Cross-validation Results]**
-
-### Nội dung:
-```
-CROSS-VALIDATION RESULTS
-
-🔄 5-FOLD STRATIFIED CV:
-
-Fold    AUC Score
-━━━━━━━━━━━━━━━━━
-Fold 1   89.67%
-Fold 2   89.91%
-Fold 3   89.78%
-Fold 4   89.95%
-Fold 5   89.89%
-━━━━━━━━━━━━━━━━━
-Mean:    89.84%
-Std Dev:  ±0.10%
-
-✅ KẾT LUẬN:
-• Performance ổn định qua các folds
-• Standard deviation rất thấp (±0.10%)
-• Model KHÔNG bị overfitting
-• Kết quả đáng tin cậy
-```
-
-### Hình ảnh:
-- Line chart hoặc box plot: AUC across 5 folds
-- Horizontal line ở 89.84% (mean)
-- **Tạo chart đơn giản**
-
-### Ghi chú trình bày:
-- CV results rất consistent
-- Std dev thấp chứng minh model stable
-- Thời gian: 1 phút
-
----
-
-## SLIDE 13: SO SÁNH VỚI LITERATURE
-**[Literature Comparison]**
-
-### Nội dung:
-```
-SO SÁNH VỚI NGHIÊN CỨU MỚI NHẤT
-
-📚 COMPARISON TABLE:
-
-Paper              Year  Data Size  Method      AUC    Imbalance
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-LFDNN             2023    0.8M     Deep Learn  81.35%   ~10:1
-XGBoost Purchase  2023    12K      XGBoost     ~85%     ~8:1
-Hybrid RF-LightFM 2024    Unknown  Hybrid      N/A      Unknown
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-ĐỒ ÁN NÀY ⭐      2024    4.1M     XGB+SMOTE   89.84%   15.78:1
-
-🏆 ƯU ĐIỂM:
-
-✅ Dataset LỚN NHẤT: 4.1M vs 0.8M vs 12K
-✅ AUC CAO NHẤT: 89.84%
-✅ Imbalance KHÓ NHẤT: 15.78:1
-✅ 100% real data, public dataset
-✅ Reproducible
-
-Improvement:
-→ +8.49% vs LFDNN
-→ +4.84% vs XGBoost Purchase
-```
-
-### Hình ảnh:
-- **Sử dụng:** `paper_comparison_detailed.png` hoặc `paper_comparison.png`
-- Clustered bar chart: Dataset size, AUC, Imbalance ratio
-- Highlight đồ án (màu khác, cao nhất)
-
-### Ghi chú trình bày:
-- Nhấn mạnh: Lớn nhất, khó nhất, kết quả tốt nhất
-- Vượt tất cả papers so sánh
-- Thời gian: 2 phút
-
----
-
-## SLIDE 14: ROC & PRECISION-RECALL CURVES
+## SLIDE 13: ROC & PRECISION-RECALL CURVES
 **[Model Performance Curves]**
 
 ### Nội dung:
@@ -540,18 +532,11 @@ Improvement:
 • Average Precision: 78.2%
 • Better for imbalanced data
 
-⚖️ CONFUSION MATRIX (Test Set):
-
-              Predicted
-              0         1
-Actual  0   756,234   15,312
-        1     7,891   41,018
-
-Metrics:
-• Precision: 72.8%
-• Recall: 83.9% (cao - detect most buyers)
-• F1-Score: 77.9%
-• Specificity: 98.0%
+✅ KẾT LUẬN:
+• Model có hiệu suất tốt (AUC > 89%)
+• High recall - detect được hầu hết potential buyers
+• Moderate precision - một số false positives
+• Trade-off hợp lý cho business
 ```
 
 ### Hình ảnh:
@@ -567,7 +552,7 @@ Metrics:
 
 ---
 
-## SLIDE 15: CROSS-DOMAIN TESTING (1)
+## SLIDE 14: CROSS-DOMAIN TESTING
 **[Cross-domain Generalization - Part 1]**
 
 ### Nội dung:
@@ -612,7 +597,7 @@ Compatibility            LOW
 
 ---
 
-## SLIDE 16: CROSS-DOMAIN TESTING (2)
+## SLIDE 15: CROSS-DOMAIN RESULTS
 **[Cross-domain Generalization - Part 2]**
 
 ### Nội dung:
@@ -657,7 +642,7 @@ Compatibility            LOW → HIGH ✅
 
 ---
 
-## SLIDE 17: MODEL INTERPRETABILITY
+## SLIDE 16: MODEL INTERPRETABILITY
 **[SHAP Analysis & Business Insights]**
 
 ### Nội dung:
@@ -700,6 +685,45 @@ hour (evening)         +0.052 (↑)
 ### Ghi chú trình bày:
 - SHAP giúp interpret model
 - Actionable insights cho business
+- Thời gian: 1.5 phút
+
+---
+
+## SLIDE 17: KẾT QUẢ ĐỊNH TÍNH
+**[Qualitative Results - Case Studies]**
+
+### Nội dung:
+```
+CASE STUDY 1: ĐÚNG
+
+User: 45 tuổi, mua sản phẩm giá cao
+Features quan trọng:
+• session_duration: Cao (35 phút)
+• products_viewed: 12 items
+• cart_added_flag: 1 (đã thêm vào giỏ)
+
+Prediction: MUA [Correct ✓]
+Reason: Long session + cart action
+
+CASE STUDY 2: ĐÚNG
+
+User: 22 tuổi, chỉ xem nhanh
+Features:
+• session_duration: Thấp (2 phút)
+• products_viewed: 3 items
+• price: Cao ($150)
+
+Prediction: KHÔNG MUA [Correct ✓]
+Reason: Short session + high price
+```
+
+### Hình ảnh:
+- Table: Case study details
+- Feature importance cho 2 cases
+
+### Ghi chú trình bày:
+- Giải thích tại sao đúng/sai
+- SHAP values cho từng case
 - Thời gian: 1.5 phút
 
 ---
@@ -802,7 +826,52 @@ HẠN CHẾ & HƯỚNG PHÁT TRIỂN
 
 ---
 
-## SLIDE 20: CẢM ƠN & HỎI ĐÁP
+## SLIDE 20: TÀI LIỆU THAM KHẢO
+**[References]**
+
+### Nội dung:
+```
+TÀI LIỆU THAM KHẢO
+
+[1] Chawla, N. V., et al. (2002). SMOTE: Synthetic Minority Over-sampling Technique. JAIR.
+
+[2] Kaggle. E-commerce Behavior Data. https://www.kaggle.com/
+
+[3] Ricci, F., et al. (2015). Recommender Systems Handbook. Springer.
+
+[4] Chen, T., & Guestrin, C. (2016). XGBoost: A Scalable Tree Boosting System. KDD.
+
+[5] Covington, P., et al. (2016). Deep Neural Networks for YouTube Recommendations. RecSys.
+
+[6] He, X., et al. (2017). Neural Factorization Machines. AAAI.
+
+[7] Burke, R. (2002). Hybrid Recommender Systems. User Model User-Adap.
+
+[8] Lops, P., et al. (2011). Content-Based Recommender Systems. Recommender Systems Handbook.
+
+[9] Rendle, S. (2010). Factorization Machines. ICDM.
+
+[10] Cen, H., et al. (2023). LFDNN: Latent Factor Deep Neural Network. ICML.
+
+[11] Zhou, G., et al. (2024). Deep Interest Network for Recommendation. NeurIPS.
+
+[12] Li, P., et al. (2021). Cross-Domain Recommendation. SIGIR.
+
+→ Additional references available in thesis
+```
+
+### Hình ảnh:
+- Logo các conferences/journals
+- Không có
+
+### Ghi chú trình bày:
+- Nêu các references quan trọng nhất
+- Focus vào Google Scholar, top conferences
+- Thời gian: 30 giây
+
+---
+
+## SLIDE 21: CẢM ƠN & HỎI ĐÁP
 **[Thank You & Q&A]**
 
 ### Nội dung:

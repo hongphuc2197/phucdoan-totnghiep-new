@@ -683,16 +683,16 @@ purchase:   244,557 (5.96%)
 #### 4.2.3. Feature Correlation Analysis
 
 **Top correlated features with Purchase:**
-1. `cart_added_flag`: 0.67
-2. `price_range`: 0.32
-3. `user_session_length`: 0.28
-4. `products_viewed_in_session`: 0.25
-5. `hour` (evening hours): 0.18
+1. `product_purchase_rate`: 0.67
+2. `product_views`: 0.32
+3. `category_price`: 0.28
+4. `category_users`: 0.25
+5. `purchase_rate`: 0.18
 
 **Interpretation:**
-- Cart addition là strong predictor
-- Price và session behavior quan trọng
-- Temporal features có impact vừa phải
+- Product purchase rate là strongest predictor
+- Product views và category features quan trọng
+- User purchase history có impact vừa phải
 
 ### 4.3. Kết quả so sánh Model
 
@@ -749,26 +749,60 @@ Mean AUC: 0.8984 ± 0.0010
 
 #### 4.3.4. Feature Importance Analysis
 
-**Top 10 Important Features (XGBoost):**
+**Phương pháp đánh giá Feature Importance:**
 
-| Rank | Feature | Importance Score | Type |
-|------|---------|------------------|------|
-| 1 | `cart_added_flag` | 0.2847 | Interaction |
-| 2 | `price` | 0.1523 | Product |
-| 3 | `user_session_length` | 0.1245 | Behavior |
-| 4 | `products_viewed_in_session` | 0.0987 | Behavior |
-| 5 | `product_popularity` | 0.0856 | Product |
-| 6 | `hour` | 0.0734 | Temporal |
-| 7 | `category_encoded` | 0.0621 | Product |
-| 8 | `brand_encoded` | 0.0589 | Product |
-| 9 | `price_range` | 0.0512 | Product |
-| 10 | `is_weekend` | 0.0421 | Temporal |
+Chúng tôi sử dụng **3 phương pháp khác nhau** để đánh giá tầm quan trọng của features:
+
+**1. XGBoost Feature Importance (Gain-based):**
+
+| Rank | Feature | Importance | Type |
+|------|---------|------------|------|
+| 1 | `purchase_rate` | 0.51 | User |
+| 2 | `session_duration_days` | 0.075 | Temporal |
+| 3 | `total_purchases` | 0.065 | User |
+| 4 | `min_price` | 0.065 | Product |
+| 5 | `product_purchases` | 0.04 | Product |
+| 6 | `product_purchase_rate` | 0.04 | Product |
+| 7 | `category_views` | 0.025 | Category |
+| 8 | `unique_categories` | 0.02 | User |
+| 9 | `category_users` | 0.015 | Category |
+| 10 | `category_purchases` | 0.015 | Category |
+
+**2. AUC Impact Analysis (Permutation-based):**
+
+| Rank | Feature | AUC Impact | Type |
+|------|---------|------------|------|
+| 1 | `product_purchase_rate` | 0.00160 | Product |
+| 2 | `product_views` | 0.00075 | Product |
+| 3 | `category_price` | 0.00065 | Category |
+| 4 | `category_users` | 0.00055 | Category |
+| 5 | `purchase_rate` | 0.00035 | User |
+| 6 | `category_purchases` | 0.00025 | Category |
+| 7 | `unique_users` | 0.00000 | User |
+| 8 | `product_purchases` | 0.00000 | Product |
+| 9 | `price_std` | -0.00000 | Product |
+| 10 | `price_category_encoded` | -0.00000 | Product |
+
+**3. Accuracy Impact Analysis:**
+
+| Rank | Feature | Accuracy Impact | Type |
+|------|---------|-----------------|------|
+| 1 | `min_price` | 0.0038-0.0039 | Product |
+| 2 | `total_events` | 0.0012-0.0013 | User |
+| 3 | `avg_price` | 0.001 | Product |
+| 4 | `price_std` | 0.001 | Product |
+| 5 | `price_category_encoded` | 0.001 | Product |
+| 6 | `product_views` | 0.001 | Product |
+| 7 | `category_price` | 0.000 | Category |
+| 8 | `product_price` | 0.000 | Product |
+| 9 | `price_ratio` | 0.000 | Product |
+| 10 | `session_duration_days` | 0.000 | Temporal |
 
 **Key Findings:**
-- Cart addition là strongest signal (28.47%)
-- Price và user behavior rất quan trọng
-- Temporal features có impact moderate
-- Product metadata cũng contribute đáng kể
+- **XGBoost importance**: `purchase_rate` là strongest predictor (0.51)
+- **AUC impact**: `product_purchase_rate` có impact cao nhất (0.00160)
+- **Accuracy impact**: `min_price` có impact cao nhất (0.0038)
+- **Consistent patterns**: User behavior và product features quan trọng trong cả 3 phương pháp
 
 ### 4.4. So sánh với nghiên cứu mới nhất
 
@@ -968,37 +1002,47 @@ True Positives:   41,018 (83.9%)
 - Shows feature contributions
 - Based on game theory
 
-**Top Features by SHAP:**
-1. `cart_added_flag`: +0.245 (strong positive)
-2. `price`: -0.134 (varies, high price reduces probability)
-3. `user_session_length`: +0.098 (positive)
-4. `products_viewed`: +0.076 (positive)
-5. `hour`: +0.052 (evening hours increase)
+**SHAP Summary Analysis:**
+
+**Linear Features (Top 10):**
+- Features có tác động tuyến tính đến prediction
+- Bao gồm: `purchase_rate`, `total_purchases`, `session_duration_days`
+- Dễ interpret và explain
+
+**Non-linear Features (Top 10):**
+- Features có tác động phi tuyến tính
+- Bao gồm: `min_price`, `product_purchase_rate`, `category_views`
+- Phức tạp hơn nhưng quan trọng
+
+**Key SHAP Insights:**
+1. **User behavior features** (`purchase_rate`, `total_purchases`) có impact cao
+2. **Product features** (`min_price`, `product_purchase_rate`) quan trọng
+3. **Category features** (`category_views`, `category_users`) có contribution đáng kể
+4. **Temporal features** (`session_duration_days`) có impact moderate
 
 #### 4.7.2. Business Insights
 
 **Actionable Insights:**
 
-1. **Cart Addition is Critical:**
-   - Users who add to cart are 5x more likely to purchase
-   - **Action:** Optimize cart UX, reduce friction
+1. **Product Purchase Rate is Critical:**
+   - Products with high purchase rate are strongest predictors
+   - **Action:** Focus marketing on high-conversion products
 
-2. **Price Sensitivity:**
-   - Sweet spot: $20-$50
-   - High-price items need different strategy
-   - **Action:** Dynamic pricing, discounts for high-price items
+2. **Product Views Matter:**
+   - Number of views strongly correlates with purchase probability
+   - **Action:** Optimize product visibility, improve search ranking
 
-3. **Session Engagement:**
-   - Longer sessions → higher purchase probability
-   - **Action:** Improve product discovery, content quality
+3. **Category-Level Insights:**
+   - Category price and user behavior patterns are important
+   - **Action:** Category-specific pricing strategies
 
-4. **Temporal Patterns:**
-   - Evening hours (18:00-22:00) have higher conversion
-   - **Action:** Time-targeted promotions
+4. **User Purchase History:**
+   - Overall purchase rate of users is predictive
+   - **Action:** Segment users by purchase behavior
 
-5. **Product Popularity:**
-   - Popular products easier to sell
-   - **Action:** Recommend trending items
+5. **Feature Optimization:**
+   - Some features have negative impact (price_std, price_category_encoded)
+   - **Action:** Consider removing or transforming these features
 
 ### 4.8. Thảo luận
 
